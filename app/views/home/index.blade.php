@@ -41,7 +41,84 @@
 		</div>
 	</section>
 	@endif
+	<!--Navigation-->
+    <nav id="menu" class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+			<a class="navbar-brand" href="#">
+				<div class="">EL JUZGDOR</div>
+			</a>
+		</div>
 
+	<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="index.html">Home</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <i class="fa fa-arrow-circle-o-down"></i></a>
+					<div class="dropdown-menu">
+						<div class="dropdown-inner">
+							<ul class="list-unstyled">
+								<li><a href="#">Login</a></li>
+								<li><a href="#">Register</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Videos <i class="fa fa-arrow-circle-o-down"></i></a>
+					<div class="dropdown-menu">
+						<div class="dropdown-inner">
+							<ul class="list-unstyled">
+								<li><a href="archive.html">Text 201</a></li>
+								<li><a href="archive.html">Text 202</a></li>
+								<li><a href="archive.html">Text 203</a></li>
+								<li><a href="archive.html">Text 204</a></li>
+								<li><a href="archive.html">Text 205</a></li>
+							</ul>
+						</div> 
+					</div>
+				</li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <i class="fa fa-arrow-circle-o-down"></i></a>
+					<div class="dropdown-menu" style="margin-left: -203.625px;">
+						<div class="dropdown-inner">
+							<ul class="list-unstyled">
+								<li><a href="archive.html">Text 301</a></li>
+								<li><a href="archive.html">Text 302</a></li>
+								<li><a href="archive.html">Text 303</a></li>
+								<li><a href="archive.html">Text 304</a></li>
+								<li><a href="archive.html">Text 305</a></li>
+							</ul>
+							<ul class="list-unstyled">
+								<li><a href="archive.html">Text 306</a></li>
+								<li><a href="archive.html">Text 307</a></li>
+								<li><a href="archive.html">Text 308</a></li>
+								<li><a href="archive.html">Text 309</a></li>
+								<li><a href="archive.html">Text 310</a></li>
+							</ul>
+							<ul class="list-unstyled">
+								<li><a href="archive.html">Text 311</a></li>
+								<li><a href="archive.html">Text 312</a></li>
+								<li><a href="archive.html#">Text 313</a></li>
+								<li><a href="archive.html#">Text 314</a></li>
+								<li><a href="archive.html">Text 315</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li><a href="#"><i class="fa fa-cubes"></i> Blocks</a></li>
+				<li><a href="contact.html"><i class="fa fa-envelope"></i> Contact</a></li>
+			</ul>
+			<div class="col-sm-3 col-md-3 navbar-right">
+				<form class="navbar-form" role="search">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search" name="q">
+					<div class="input-group-btn">
+						<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div><!-- /.navbar-collapse -->
+	</nav>
 <!-- /////////////////////////////////////////Content -->
 	<div id="page-content" class="index-page">
 		<div class="clearfix no-gutter">
@@ -72,9 +149,13 @@
 						</div>
 					@endforeach
 				</div>
-				<div class="col-xs-12 text-center btn-load-more visible-sm">
-					<button class="btn btn-info load-more" data-target=".gutter-7px" data-url="{{ URL::to('noticias/cargar-mobil') }}">Mas Noticias</button>
+				@if($news->getLastPage() > 1)
+				<div class="col-xs-12 text-center btn-load-more">
+					<button class="btn btn-info load-more" data-target=".gutter-7px" value="{{ $news->getUrl($news->getCurrentPage()+1) }}" data-url="{{ URL::to('noticias/cargar-mas') }}">
+						Mas Noticias
+					</button>
 				</div>
+				@endif
 			</div>
 			<div id="sidebar" class="col-md-3 fix-left">
 				<!---- Start Widget ---->

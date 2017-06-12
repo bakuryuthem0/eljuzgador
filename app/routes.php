@@ -13,7 +13,7 @@
 Route::pattern('id', '[0-9]+');
 
 Route::get('/', 'HomeController@getIndex');
-Route::get('noticias/cargar-mobil','HomeController@getMobileNews');
+Route::get('noticias/cargar-mas','HomeController@getMoreNews');
 
 Route::group(array('before' => 'no_auth'),function()
 {

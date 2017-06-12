@@ -23,7 +23,8 @@ class HomeController extends BaseController {
 		->where('is_main','=',0)
 		->with('category')
 		->with('images')
-		->get();
+		->orderBy('id','DESC')
+		->paginate(8);
 		$relevant = Article::where('is_relevant','=',1)
 		->with('category')
 		->with('images')
@@ -40,5 +41,19 @@ class HomeController extends BaseController {
 		->with('relevant',$relevant)
 		->with('main',$main);
 	}
+	public function getMoreNews()
+	{
+		$page = Input::get('page');
+		$news = Article::where('is_relevant','=',0)
+		->where('is_main','=',0)
+		->with('category')
+		->with('images')
+		->orderBy('id','DESC')
+		->skip(8*$page)
+		->take(8)
+		->get();
 
+		return View::make('partials.more-news')
+		->with('news',$news);
+	}
 }

@@ -14,9 +14,8 @@ function ajaxError(btn){
 }
 jQuery(document).ready(function($) {
 	$(document).on("click",'.load-more',function(){
-		$('.gutter-7px > div:not(.active)').last().addClass('active');
 		var dataPost = {}, btn = $(this);
-		doAjax('http://localhost/eljuzgador/partials/more-news.php', "GET", "html", dataPost, btn, beforeSend, loadContentNews, ajaxError);
+		doAjax(btn.data('url'), "GET", "html", dataPost, btn, beforeSend, loadContentNews, ajaxError);
 	})
 	$('.comment-form .validate-input').on('blur, keyup',function(){
 		if (validate()) {
