@@ -1,0 +1,158 @@
+.responseAjax,.to-clone
+{
+	display: none;
+}
+.responseAjax.active, .to-clone.active
+{
+	display: block
+}
+.to-clone button.close:not(.btn-elim-image);
+{
+	width: 100%;
+	text-align: right;
+}
+.to-clone button.close
+{
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+.to-clone button.close.btn-elim-image
+{
+	font-size: 3em;
+	text-align: right;
+}
+.outpost img, .outpost iframe, .outpost iframe img
+{
+    max-width: 320px;
+}
+.formulario
+{
+	margin-bottom: 1em;
+}
+.no-auth
+{
+	width: 100%;
+	margin-left: 0;
+}
+.miniLoader
+{
+	width: 20px;
+	display: none;	
+}
+.loader.miniLoader
+{
+	margin-top: 10px;
+}
+.miniLoader.active
+{
+	display: inline-block;
+}
+.navbar-custom-menu>.navbar-nav>li
+{
+	height: 50px;
+}
+.navbar-custom-menu>.navbar-nav>li> a 
+{
+	height: 100%;
+}
+.avatar-change
+{
+    background-color: rgba(0,0,0,0.5);
+    cursor: pointer;
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+       -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+         -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+}
+.avatar-change p
+{
+    color: white;
+    font-weight: bolder;
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform:  translate(-50%,-50%);
+       -moz-transform:  translate(-50%,-50%);
+        -ms-transform:  translate(-50%,-50%);
+         -o-transform:  translate(-50%,-50%);
+            transform:  translate(-50%,-50%);
+
+}
+.profile-user-img {
+    height: 160px;
+    width: 160px;
+}
+.img-circle {
+    border-radius: 50%;
+}
+.control-label p
+{
+	display: inline-block;
+	margin-left: 5px;
+}
+.center-block
+{
+	display: block;
+	float: none !important;
+	margin: 0 auto;
+}
+.input-group
+{
+	width: 100%;
+}
+.popover
+{
+  background-color: #333; 
+}
+.popover .popover-content
+{
+  text-align: justify;
+  color: #fff;
+}
+.map iframe
+{
+  width: 100%;
+}
+.thumb-image
+{
+	max-width: 320px;
+}
+.table tbody tr td, .table tbody tr th
+{
+	vertical-align: middle;
+	text-align: center;
+}
+.alert
+{
+  margin-top: 1em;
+}
+.change-image-input
+{
+  position: absolute;
+  top: 10px;
+  right: 0;
+  cursor: pointer;
+  z-index: 100;
+  -webkit-transition: all .25s linear;
+     -moz-transition: all .25s linear;
+      -ms-transition: all .25s linear;
+       -o-transition: all .25s linear;
+          transition: all .25s linear;
+}
+.change-image-input:hover, .change-image-input:focus
+{
+  -webkit-transform: rotate(360deg);
+     -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+       -o-transform: rotate(360deg);
+          transform: rotate(360deg);
+}

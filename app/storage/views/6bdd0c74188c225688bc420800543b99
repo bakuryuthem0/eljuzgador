@@ -1,0 +1,128 @@
+<?php $__env->startSection('content'); ?>
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active"><a href="#"><i class="fa fa-shopping-bag"></i> Ver productos</a></li>
+      </ol>
+    </section>
+    <div class="row">
+      	<div class="col-xs-12 col-md-11 center-block formulario">
+          	<div class="box box-success">
+                <div class="box-header">
+                  <i class="fa fa-comments-o"></i>
+                  <h3 class="box-title">Ver productos</h3>
+                </div>
+                <div class="box-body">
+                  <div class="alert alert-danger hidden cat-full">
+                    
+                  </div>
+                  <div class="table-responsive">
+                    <table id="example1" class="table table-bordered table-striped menu-cat-table">
+                      <thead>
+                        <tr>
+                          <th>Id</th>
+                          <th>ante-titulo</th>
+                          <th>Titulo</th>
+                          <th>sub-titulo</th>
+                          <th>Ver Detalles</th>
+                          <th class="menu_active_title" data-toggle="popover" data-trigger="manual" title="Alerta" data-content="">Relevante</th>
+                          <th>Modificar</th>
+                          <th>Eliminar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                       <?php foreach($articles as $a): ?>
+                       <tr>
+                       	<td><?php echo $a->id; ?></td>
+                       	<td><?php if($a->pretitle): ?> <?php echo $a->pretitle->title; ?> <?php else: ?> Sin ante-titulo <?php endif; ?></td>
+                        <td><?php echo $a->title; ?></td>
+                        <td><?php if($a->subtitle): ?> <?php echo $a->subtitle->title; ?> <?php else: ?> Sin sub-titulo <?php endif; ?></td>
+                        <td><button class="btn btn-info btn-xs show-item-info" value="<?php echo $a->id; ?>" data-toggle="modal" data-target="#showItemInfo">Ver</button></td>
+                        <td>
+                          <img src="<?php echo asset('images/loader.gif'); ?>" class="miniLoader">
+                          <input type="checkbox" class="menu_active menu_active_<?php echo $a->id; ?>" data-url="<?php echo URL::to('administrador/noticias/activar-relevante'); ?>" data-max-text="3 categorías" data-length="3" name="menu_cat_<?php echo $a->id; ?>" value="<?php echo $a->id; ?>" <?php if($a->is_relevant == 1): ?> checked <?php endif; ?>>
+                        </td>
+                       	<td><a target="_blank" href="<?php echo URL::to('administrador/noticia/modificar/'.$a->id); ?>" class="btn btn-warning btn-xs">Modificar</a></td>
+                       	<td><button class="btn btn-danger btn-xs btn-elim-article" value="<?php echo $a->id; ?>" data-toggle="modal" data-target="#elimThing" data-url="<?php echo URL::to('administrador/ver-articulos/eliminar'); ?>" data-tosend="id">Eliminar</button></td>
+                       </tr>
+                       <?php endforeach; ?>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>Id</th>
+                          <th>ante-titulo</th>
+                          <th>Titulo</th>
+                          <th>Ver Detalles</th>
+                          <th>Modificar</th>
+                          <th>Eliminar</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div><!-- /.box-body -->
+      		</div>
+    	</div>
+
+  	</div><!-- /.content-wrapper -->
+</div>  
+<div class="modal fade" id="showItemInfo">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Detalles del producto</h4>
+      </div>
+      <div class="modal-body">
+        <div class="alert responseAjax">
+          <p></p>
+        </div>
+        <div class="text-center">
+          <img src="<?php echo asset('images/loader.gif'); ?>" class="miniLoader active">
+        </div>
+        <div class="partial-container">
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<?php echo View::make('partials.modalElim'); ?>
+
+<?php echo Form::token(); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('postscript'); ?>
+    <?php echo HTML::style('templates/admin/plugins/datatables/dataTables.bootstrap.css'); ?>
+
+    <?php echo HTML::script('templates/admin/plugins/datatables/jquery.dataTables.min.js'); ?>
+
+    <?php echo HTML::script('templates/admin/plugins/datatables/dataTables.bootstrap.min.js'); ?>
+
+
+    <script>
+      $(function () {
+        $('#example1').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": true,
+          "ordering": true,
+          "order": [],
+          "info": true,
+          "autoWidth": false
+        });
+      });
+    </script>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

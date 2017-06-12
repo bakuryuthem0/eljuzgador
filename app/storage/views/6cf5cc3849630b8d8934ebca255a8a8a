@@ -1,0 +1,32 @@
+<?php $__env->startSection('content'); ?>
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Dashboard
+            <small>Control panel</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li class="active"><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <?php if(Session::has('danger')): ?>
+            <div class="alert alert-danger">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <?php echo Session::get('danger'); ?>
+
+            </div>
+          <?php endif; ?>
+         
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+        
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('postscript'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

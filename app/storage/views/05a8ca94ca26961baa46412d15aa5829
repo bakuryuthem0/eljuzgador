@@ -1,0 +1,46 @@
+<?php $__env->startSection('content'); ?>
+
+<div class="login-box">
+  <div class="login-logo logo-login">
+    <a href="<?php echo URL::to('administrador'); ?>"><b>Sistema de administracion eljuzgador.com</b></a>
+  </div><!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Iniciar Sesión</p>
+    <?php if(Session::has('danger')): ?>
+    <div class="alert alert-danger">
+      <p><?php echo Session::get('danger'); ?></p>
+    </div>
+    <?php endif; ?>
+    <div class="alert responseAjax">
+        <p></p>
+    </div>
+    <form>
+        <div class="form-group has-feedback">
+          <input type="email" name="email" class="form-control email login-input" placeholder="Email">
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <input type="password" name="password" class="form-control password login-input" placeholder="Contraseña">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <?php echo Form::token(); ?>
+
+    </form>
+    <div class="row">
+      <div class="col-xs-8 pull-right">
+        <button type="submit" class="btn btn-primary btn-block btn-flat logMeIn" value="<?php echo URL::to('administrador/login/enviar'); ?>">Iniciar Sesión</button>
+      </div><!-- /.col -->
+      <div class="col-xs-2 pull-right no-padding"><img src="<?php echo asset('images/loader.gif'); ?>" class="pull-right miniLoader"></div>
+    </div>
+
+    <a href="#">Olvide mi contraseña</a><br>
+
+  </div><!-- /.login-box-body -->
+</div><!-- /.login-box -->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('postscript'); ?>
+<script type="text/javascript">
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
