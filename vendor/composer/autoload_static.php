@@ -199,6 +199,10 @@ class ComposerStaticInitd77f3742ce750d937c9c890360926244
             array (
                 0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
             ),
+            'Conner\\Tagging\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/rtconner/laravel-tagging/src',
+            ),
             'ClassPreloader' => 
             array (
                 0 => __DIR__ . '/..' . '/classpreloader/classpreloader/src',
@@ -214,6 +218,10 @@ class ComposerStaticInitd77f3742ce750d937c9c890360926244
     );
 
     public static $classMap = array (
+        'AdminController' => __DIR__ . '/../..' . '/app/controllers/AdminController.php',
+        'Article' => __DIR__ . '/../..' . '/app/models/Article.php',
+        'ArticleImages' => __DIR__ . '/../..' . '/app/models/ArticleImages.php',
+        'AuthController' => __DIR__ . '/../..' . '/app/controllers/AuthController.php',
         'BaseController' => __DIR__ . '/../..' . '/app/controllers/BaseController.php',
         'Boris\\Boris' => __DIR__ . '/..' . '/d11wtq/boris/lib/Boris/Boris.php',
         'Boris\\CLIOptionsHandler' => __DIR__ . '/..' . '/d11wtq/boris/lib/Boris/CLIOptionsHandler.php',
@@ -228,6 +236,7 @@ class ComposerStaticInitd77f3742ce750d937c9c890360926244
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
+        'Categoria' => __DIR__ . '/../..' . '/app/models/Categoria.php',
         'ClassPreloader\\Application' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassPreloader/Application.php',
         'ClassPreloader\\ClassList' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassPreloader/ClassList.php',
         'ClassPreloader\\ClassLoader' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassPreloader/ClassLoader.php',
@@ -238,6 +247,13 @@ class ComposerStaticInitd77f3742ce750d937c9c890360926244
         'ClassPreloader\\Parser\\DirVisitor' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassPreloader/Parser/DirVisitor.php',
         'ClassPreloader\\Parser\\FileVisitor' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassPreloader/Parser/FileVisitor.php',
         'ClassPreloader\\Parser\\NodeTraverser' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassPreloader/Parser/NodeTraverser.php',
+        'Conner\\Tagging\\Tag' => __DIR__ . '/..' . '/rtconner/laravel-tagging/src/Conner/Tagging/Tag.php',
+        'Conner\\Tagging\\TaggableTrait' => __DIR__ . '/..' . '/rtconner/laravel-tagging/src/Conner/Tagging/TaggableTrait.php',
+        'Conner\\Tagging\\Tagged' => __DIR__ . '/..' . '/rtconner/laravel-tagging/src/Conner/Tagging/Tagged.php',
+        'Conner\\Tagging\\TaggingServiceProvider' => __DIR__ . '/..' . '/rtconner/laravel-tagging/src/Conner/Tagging/TaggingServiceProvider.php',
+        'Conner\\Tagging\\TaggingUtil' => __DIR__ . '/..' . '/rtconner/laravel-tagging/src/Conner/Tagging/TaggingUtil.php',
+        'CreateTaggedTable' => __DIR__ . '/..' . '/rtconner/laravel-tagging/src/migrations/2014_01_07_073615_create_tagged_table.php',
+        'CreateTagsTable' => __DIR__ . '/..' . '/rtconner/laravel-tagging/src/migrations/2014_01_07_073615_create_tags_table.php',
         'Crypt_AES' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
         'Crypt_Base' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Base.php',
         'Crypt_Blowfish' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Blowfish.php',
@@ -631,6 +647,7 @@ class ComposerStaticInitd77f3742ce750d937c9c890360926244
         'Jeremeamia\\SuperClosure\\SerializableClosure' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/SerializableClosure.php',
         'Jeremeamia\\SuperClosure\\Visitor\\ClosureFinderVisitor' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/Visitor/ClosureFinderVisitor.php',
         'Jeremeamia\\SuperClosure\\Visitor\\MagicConstantVisitor' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/Visitor/MagicConstantVisitor.php',
+        'Like' => __DIR__ . '/../..' . '/app/models/Like.php',
         'Math_BigInteger' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Math/BigInteger.php',
         'Monolog\\ErrorHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ErrorHandler.php',
         'Monolog\\Formatter\\ChromePHPFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ChromePHPFormatter.php',
@@ -725,6 +742,7 @@ class ComposerStaticInitd77f3742ce750d937c9c890360926244
         'Net_SFTP_Stream' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Net/SFTP/Stream.php',
         'Net_SSH1' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Net/SSH1.php',
         'Net_SSH2' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Net/SSH2.php',
+        'NewsController' => __DIR__ . '/../..' . '/app/controllers/NewsController.php',
         'Normalizer' => __DIR__ . '/..' . '/patchwork/utf8/src/Normalizer.php',
         'PHPParser_Autoloader' => __DIR__ . '/..' . '/nikic/php-parser/lib/PHPParser/Autoloader.php',
         'PHPParser_Builder' => __DIR__ . '/..' . '/nikic/php-parser/lib/PHPParser/Builder.php',
@@ -1177,6 +1195,7 @@ class ComposerStaticInitd77f3742ce750d937c9c890360926244
         'Predis\\Session\\SessionHandler' => __DIR__ . '/..' . '/predis/predis/lib/Predis/Session/SessionHandler.php',
         'Predis\\Transaction\\AbortedMultiExecException' => __DIR__ . '/..' . '/predis/predis/lib/Predis/Transaction/AbortedMultiExecException.php',
         'Predis\\Transaction\\MultiExecContext' => __DIR__ . '/..' . '/predis/predis/lib/Predis/Transaction/MultiExecContext.php',
+        'Pretitle' => __DIR__ . '/../..' . '/app/models/Pretitle.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
         'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
@@ -1187,9 +1206,11 @@ class ComposerStaticInitd77f3742ce750d937c9c890360926244
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Role' => __DIR__ . '/../..' . '/app/models/Role.php',
         'SessionHandlerInterface' => __DIR__ . '/..' . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
         'Stack\\Builder' => __DIR__ . '/..' . '/stack/builder/src/Stack/Builder.php',
         'Stack\\StackedHttpKernel' => __DIR__ . '/..' . '/stack/builder/src/Stack/StackedHttpKernel.php',
+        'Subtitle' => __DIR__ . '/../..' . '/app/models/Subtitle.php',
         'Symfony\\Component\\BrowserKit\\Client' => __DIR__ . '/..' . '/symfony/browser-kit/Client.php',
         'Symfony\\Component\\BrowserKit\\Cookie' => __DIR__ . '/..' . '/symfony/browser-kit/Cookie.php',
         'Symfony\\Component\\BrowserKit\\CookieJar' => __DIR__ . '/..' . '/symfony/browser-kit/CookieJar.php',
@@ -1787,6 +1808,8 @@ class ComposerStaticInitd77f3742ce750d937c9c890360926244
         'System_SSH_Agent_Identity' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/System/SSH/Agent.php',
         'TestCase' => __DIR__ . '/../..' . '/app/tests/TestCase.php',
         'User' => __DIR__ . '/../..' . '/app/models/User.php',
+        'UserController' => __DIR__ . '/../..' . '/app/controllers/UserController.php',
+        'Visitor' => __DIR__ . '/../..' . '/app/models/Visitor.php',
         'Whoops\\Exception\\ErrorException' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/ErrorException.php',
         'Whoops\\Exception\\Formatter' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Formatter.php',
         'Whoops\\Exception\\Frame' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Frame.php',

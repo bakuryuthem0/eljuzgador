@@ -17,6 +17,7 @@ return array(
     'Illuminate' => array($vendorDir . '/laravel/framework/src'),
     'File' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Crypt' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'Conner\\Tagging\\' => array($vendorDir . '/rtconner/laravel-tagging/src'),
     'ClassPreloader' => array($vendorDir . '/classpreloader/classpreloader/src'),
     'Boris' => array($vendorDir . '/d11wtq/boris/lib'),
 );
