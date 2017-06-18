@@ -28,6 +28,7 @@ class AdminController extends BaseController {
  			return Redirect::back()->withErrors($validator)->withInput();
  		}
 		$cat = new Categoria;
+		$cat->slug         = str_replace(' ','-',strtolower($data['name']));
 		$cat->description  = $data['name'];
 		if ($cat->save()) {
 			Session::flash('success','Se ha creado la categoría satisfactoriamente.');
@@ -70,6 +71,7 @@ class AdminController extends BaseController {
  			return Redirect::back()->withErrors($validator)->withInput();
  		}
 		$cat   = Categoria::find($id);
+		$cat->slug        = str_replace(' ','-',strtolower($data['name']));
 		$cat->description = $data['name'];
 		if ($cat->save()) {
 			Session::flash('success','Se ha modificado la categoría satisfactoriamente.');

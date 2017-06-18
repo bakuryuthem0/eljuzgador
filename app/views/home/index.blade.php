@@ -2,24 +2,30 @@
 
 @section('content')
 	@if(count($relevant) > 0 || count($main) > 0)
-	<section class="row">
-		<div class="no-padding col-xs-12 @if(count($relevant) > 0) col-md-8 @endif main-news zoom-container">
+	<section class="row important-news-container">
+		@if(!empty($main))
+		<div class="no-padding col-xs-12 @if(count($relevant) > 0) col-sm-6 col-md-8 @endif main-news zoom-container relevant-news" data-url="{{ URL::to('noticias/ver-noticia/'.$main->slug) }}">
 			<div class="zoom-caption">
 				<div class="zoom-caption-inner">
 					<div class="date-feat">
 						<i class="fa fa-clock-o"></i>
-						<span>26 Jan , 2016  </span>
+						<span>{{ date('d/m/Y',strtotime($main->created_at)) }}</span>
 						<i class="fa fa-video-camera"></i>
 						<span>Video</span>
 					</div>
-					<h3>Video Post with Featured Image</h3> 
+					<h3>{{ $main->title }}</h3> 
 				</div>
 			</div>
-			<img src="{{ asset('templates/myafrica/images/12.jpg') }}" class="img-responsive">
+			@if(strpos($main->images->first()->image,'http://') === 0 || strpos($main->images->first()->image,'https://') === 0)
+				<img src="{{ $main->images->first()->image }}" class="img-responsive">
+			@else	
+				<img src="{{ asset('images/news/'.$main->id.'/'.$main->images->first()->image) }}" class="img-responsive">
+			@endif
 		</div>
-		<div class="no-padding col-xs-12 @if(count($main) > 0) col-md-4 @endif main-news">
+		@endif
+		<div class="no-padding col-xs-12 @if(count($main) > 0) col-sm-6 col-md-4 @endif main-news">
 			@foreach($relevant as $r)
-			<div class="col-xs-4 col-md-12 col- side-news zoom-container">
+			<div class="col-xs-4 col-sm-12 side-news zoom-container relevant-news" data-url="{{ URL::to('noticias/ver-noticia/'.$r->slug) }}">
 				<div class="zoom-caption">
 					<div class="zoom-caption-inner">
 						<div class="date-feat">
@@ -41,85 +47,7 @@
 		</div>
 	</section>
 	@endif
-	<!--Navigation-->
-    <nav id="menu" class="navbar navbar-default" role="navigation">
-		<div class="navbar-header">
-			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
-			<a class="navbar-brand" href="#">
-				<div class="">EL JUZGDOR</div>
-			</a>
-		</div>
-
-	<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<ul class="nav navbar-nav">
-				<li><a href="index.html">Home</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <i class="fa fa-arrow-circle-o-down"></i></a>
-					<div class="dropdown-menu">
-						<div class="dropdown-inner">
-							<ul class="list-unstyled">
-								<li><a href="#">Login</a></li>
-								<li><a href="#">Register</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Videos <i class="fa fa-arrow-circle-o-down"></i></a>
-					<div class="dropdown-menu">
-						<div class="dropdown-inner">
-							<ul class="list-unstyled">
-								<li><a href="archive.html">Text 201</a></li>
-								<li><a href="archive.html">Text 202</a></li>
-								<li><a href="archive.html">Text 203</a></li>
-								<li><a href="archive.html">Text 204</a></li>
-								<li><a href="archive.html">Text 205</a></li>
-							</ul>
-						</div> 
-					</div>
-				</li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <i class="fa fa-arrow-circle-o-down"></i></a>
-					<div class="dropdown-menu" style="margin-left: -203.625px;">
-						<div class="dropdown-inner">
-							<ul class="list-unstyled">
-								<li><a href="archive.html">Text 301</a></li>
-								<li><a href="archive.html">Text 302</a></li>
-								<li><a href="archive.html">Text 303</a></li>
-								<li><a href="archive.html">Text 304</a></li>
-								<li><a href="archive.html">Text 305</a></li>
-							</ul>
-							<ul class="list-unstyled">
-								<li><a href="archive.html">Text 306</a></li>
-								<li><a href="archive.html">Text 307</a></li>
-								<li><a href="archive.html">Text 308</a></li>
-								<li><a href="archive.html">Text 309</a></li>
-								<li><a href="archive.html">Text 310</a></li>
-							</ul>
-							<ul class="list-unstyled">
-								<li><a href="archive.html">Text 311</a></li>
-								<li><a href="archive.html">Text 312</a></li>
-								<li><a href="archive.html#">Text 313</a></li>
-								<li><a href="archive.html#">Text 314</a></li>
-								<li><a href="archive.html">Text 315</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li><a href="#"><i class="fa fa-cubes"></i> Blocks</a></li>
-				<li><a href="contact.html"><i class="fa fa-envelope"></i> Contact</a></li>
-			</ul>
-			<div class="col-sm-3 col-md-3 navbar-right">
-				<form class="navbar-form" role="search">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" name="q">
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-					</div>
-				</div>
-				</form>
-			</div>
-		</div><!-- /.navbar-collapse -->
-	</nav>
-<!-- /////////////////////////////////////////Content -->
+	{{ $navbar }}
 	<div id="page-content" class="index-page">
 		<div class="clearfix no-gutter">
 			<div id="main-content" class="col-md-9 fix-right">
@@ -128,22 +56,31 @@
 						<div class="col-xs-12 col-sm-4 item">
 							<article>
 								<div class="entry-header">
-									<div class="grid-cat"><a href="#">{{ $n->category->description }}</a></div>
-									<h3 class="entry-title"><a href="#">{{ $n->title }}</a></h3>
-									<span><i class="fa fa-heart"></i> 1,200 / <i class="fa fa-calendar"></i> {{ date('d-m-Y',strtotime($n->created_at)) }} / <i class="fa fa-comment-o"></i> 10 / <i class="fa fa-eye"></i> 945</span>
+									<div class="grid-cat"><a href="{{ URL::to('noticias/ver-noticia/'.$n->slug) }}">{{ $n->category->description }}</a></div>
+									<h3 class="entry-title"><a href="{{ URL::to('noticias/ver-noticia/'.$n->slug) }}">{{ $n->title }}</a></h3>
+									<span>
+										@if(!is_null($n->likes_count->first()))<i class="fa fa-heart"></i> {{ $n->likes_count->first()->aggregate }} / @endif
+										<i class="fa fa-calendar"></i> {{ date('d-m-Y',strtotime($n->created_at)) }} / 
+										@if(!is_null($n->comments_count->first()))<i class="fa fa-comment-o"></i> {{ $n->comments_count->first()->aggregate }} / @endif
+										@if(!is_null($n->visits_count->first()))<i class="fa fa-eye"></i> {{ $n->visits_count->first()->aggregate }}@endif
+									</span>
 								</div>
 								<div class="post-thumbnail-wrap">
-									<a href="{{ URL::to('noticias/ver-noticia/'.$n->id) }}">
-										@if(strpos($n->images->first()->image,"http://") === 0 || strpos($n->images->first()->image,"https://") === 0)
-											<img src="{{ $n->images->first()->image }}">
+									<a href="{{ URL::to('noticias/ver-noticia/'.$n->slug) }}">
+										@if(!is_null($n->images->first()))
+											@if(strpos($n->images->first()->image,"http://") === 0 || strpos($n->images->first()->image,"https://") === 0)
+												<img src="{{ $n->images->first()->image }}" alt="{{ $n->title }}">
+											@else
+												<img src="{{ asset('images/news/'.$n->id.'/'.$n->images->first()->image) }}" alt="{{ $n->title }}">
+											@endif
 										@else
-											<img src="{{ asset('images/news/'.$n->id.'/'.$n->images->first()->image) }}">
+											<img src="{{ asset('images/logo.png') }}" alt="{{ $n->title }}">
 										@endif
 									</a>
 								</div>
 								<div class="entry-content">
 									<p>{{ ucfirst(substr(strip_tags($n->description), 0, 100)) }}</p>
-									<a href="single.html">Más...</a>
+									<a href="{{ URL::to('noticias/'.$n->slug) }}">Más...</a>
 								</div>
 							</article>
 						</div>
@@ -151,330 +88,16 @@
 				</div>
 				@if($news->getLastPage() > 1)
 				<div class="col-xs-12 text-center btn-load-more">
-					<button class="btn btn-info load-more" data-target=".gutter-7px" value="{{ $news->getUrl($news->getCurrentPage()+1) }}" data-url="{{ URL::to('noticias/cargar-mas') }}">
+					<button class="btn btn-info load-more" data-target=".gutter-7px" data-url="{{ URL::to('noticias/cargar-mas').'?page='.($news->getCurrentPage()+1) }}" data-current="{{ $news->getCurrentPage()+1 }}">
 						Mas Noticias
 					</button>
 				</div>
 				@endif
 			</div>
-			<div id="sidebar" class="col-md-3 fix-left">
-				<!---- Start Widget ---->
-				<div class="widget wid-vid">
-					<div class="heading">
-						<h4>Videos</h4>
-					</div>
-					<div class="content">
-						<ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#most">Most Plays</a></li>
-							<li><a data-toggle="tab" href="#popular">Popular</a></li>
-							<li><a data-toggle="tab" href="#random">Random</a></li>
-						</ul>
-						<div class="tab-content">
-							<div id="most" class="tab-pane fade in active">
-								<div class="post wrap-vid">
-									<div class="zoom-container">
-										<div class="zoom-caption">
-											<a href="single.html"></a>
-										</div>
-										<img src="{{ asset('templates/myafrica/images/22.jpg" />')}}
-									</div>
-									<div class="wrapper">
-										<h5 class="vid-name"><a href="#">Video's Name</a></h5>
-										<div class="info">
-											<h6>By <a href="#">Kelvin</a></h6>
-											<span><i class="fa fa-calendar"></i>25/3/2016</span> 
-											<span><i class="fa fa-heart"></i>1,200</span>
-										</div>
-									</div>
-								</div>
-								<div class="post wrap-vid">
-									<div class="zoom-container">
-										<div class="zoom-caption">
-											<a href="single.html"></a>
-										</div>
-										<img src="{{ asset('templates/myafrica/images/23.jpg" />')}}
-									</div>
-									<div class="wrapper">
-										<h5 class="vid-name"><a href="#">Video's Name</a></h5>
-										<div class="info">
-											<h6>By <a href="#">Kelvin</a></h6>
-											<span><i class="fa fa-calendar"></i>25/3/2016</span> 
-											<span><i class="fa fa-heart"></i>1,200</span>
-										</div>
-									</div>
-								</div>
-								<div class="post wrap-vid">
-									<div class="zoom-container">
-										<div class="zoom-caption">
-											<a href="single.html"></a>
-										</div>
-										<img src="{{ asset('templates/myafrica/images/24.jpg" />')}}
-									</div>
-									<div class="wrapper">
-										<h5 class="vid-name"><a href="#">Video's Name</a></h5>
-										<div class="info">
-											<h6>By <a href="#">Kelvin</a></h6>
-											<span><i class="fa fa-calendar"></i>25/3/2016</span> 
-											<span><i class="fa fa-heart"></i>1,200</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="popular" class="tab-pane fade">
-								<div class="post wrap-vid">
-									<div class="zoom-container">
-										<div class="zoom-caption">
-											<a href="single.html"></a>
-										</div>
-										<img src="{{ asset('templates/myafrica/images/24.jpg" />')}}
-									</div>
-									<div class="wrapper">
-										<h5 class="vid-name"><a href="#">Video's Name</a></h5>
-										<div class="info">
-											<h6>By <a href="#">Kelvin</a></h6>
-											<span><i class="fa fa-calendar"></i>25/3/2016</span> 
-											<span><i class="fa fa-heart"></i>1,200</span>
-										</div>
-									</div>
-								</div>
-								<div class="post wrap-vid">
-									<div class="zoom-container">
-										<div class="zoom-caption">
-											<a href="single.html"></a>
-										</div>
-										<img src="{{ asset('templates/myafrica/images/22.jpg" />')}}
-									</div>
-									<div class="wrapper">
-										<h5 class="vid-name"><a href="#">Video's Name</a></h5>
-										<div class="info">
-											<h6>By <a href="#">Kelvin</a></h6>
-											<span><i class="fa fa-calendar"></i>25/3/2016</span> 
-											<span><i class="fa fa-heart"></i>1,200</span>
-										</div>
-									</div>
-								</div>
-								<div class="post wrap-vid">
-									<div class="zoom-container">
-										<div class="zoom-caption">
-											<a href="single.html"></a>
-										</div>
-										<img src="{{ asset('templates/myafrica/images/23.jpg" />')}}
-									</div>
-									<div class="wrapper">
-										<h5 class="vid-name"><a href="#">Video's Name</a></h5>
-										<div class="info">
-											<h6>By <a href="#">Kelvin</a></h6>
-											<span><i class="fa fa-calendar"></i>25/3/2016</span> 
-											<span><i class="fa fa-heart"></i>1,200</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="random" class="tab-pane fade">
-								<div class="post wrap-vid">
-									<div class="zoom-container">
-										<div class="zoom-caption">
-											<a href="single.html"></a>
-										</div>
-										<img src="{{ asset('templates/myafrica/images/23.jpg" />')}}
-									</div>
-									<div class="wrapper">
-										<h5 class="vid-name"><a href="#">Video's Name</a></h5>
-										<div class="info">
-											<h6>By <a href="#">Kelvin</a></h6>
-											<span><i class="fa fa-calendar"></i>25/3/2016</span> 
-											<span><i class="fa fa-heart"></i>1,200</span>
-										</div>
-									</div>
-								</div>
-								<div class="post wrap-vid">
-									<div class="zoom-container">
-										<div class="zoom-caption">
-											<a href="single.html"></a>
-										</div>
-										<img src="{{ asset('templates/myafrica/images/24.jpg" />')}}
-									</div>
-									<div class="wrapper">
-										<h5 class="vid-name"><a href="#">Video's Name</a></h5>
-										<div class="info">
-											<h6>By <a href="#">Kelvin</a></h6>
-											<span><i class="fa fa-calendar"></i>25/3/2016</span> 
-											<span><i class="fa fa-heart"></i>1,200</span>
-										</div>
-									</div>
-								</div>
-								<div class="post wrap-vid">
-									<div class="zoom-container">
-										<div class="zoom-caption">
-											<a href="single.html"></a>
-										</div>
-										<img src="{{ asset('templates/myafrica/images/22.jpg" />')}}
-									</div>
-									<div class="wrapper">
-										<h5 class="vid-name"><a href="#">Video's Name</a></h5>
-										<div class="info">
-											<h6>By <a href="#">Kelvin</a></h6>
-											<span><i class="fa fa-calendar"></i>25/3/2016</span> 
-											<span><i class="fa fa-heart"></i>1,200</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!---- Start Widget ---->
-				<div class="widget wid-tags">
-					<div class="heading"><h4>Search</h4></div>
-					<div class="content">
-						<form role="form" class="form-horizontal" method="post" action="">
-							<input type="text" placeholder="Enter Search Keywords" value="" name="v_search" id="v_search" class="form-control">
-						</form>
-					</div>
-				</div>
-				<!---- Start Widget ---->
-				<div class="widget wid-tags">
-					<div class="heading"><h4>Tags</h4></div>
-					<div class="content">
-						<a href="#">animals</a>
-						<a href="#">cooking</a>
-						<a href="#">countries</a>
-						<a href="#">home</a>
-						<a href="#">likes</a>
-						<a href="#">photo</a>
-						<a href="#">link</a>
-						<a href="#">video</a>
-						<a href="#">travel</a>
-						<a href="#">images</a>
-						<a href="#">love</a>
-						<a href="#">lists</a>
-						<a href="#">makeup</a>
-						<a href="#">media</a>
-						<a href="#">password</a>
-						<a href="#">pagination</a>
-						<a href="#">pictures</a>
-					</div>
-				</div>
-				<!---- Start Widget ---->
-				<div class="widget wid-comment">
-					<div class="heading"><h4>Top Comments</h4></div>
-					<div class="content">
-						<div class="post">
-							<a href="single.html">
-								<img src="{{ asset('templates/myafrica/images/ava-1.jpg')}}" class="img-circle"/>
-							</a>
-							<div class="wrapper">
-								<a href="#"><h5>Curabitur tincidunt porta lorem.</h5></a>
-								<ul class="list-inline">
-									<li><i class="fa fa-calendar"></i>25/3/2016</li> 
-									<li><i class="fa fa-thumbs-up"></i>1,200</li>
-								</ul>
-							</div>
-						</div>
-						<div class="post">
-							<a href="single.html">
-								<img src="{{ asset('templates/myafrica/images/ava-2.png')}}" class="img-circle"/>
-							</a>
-							<div class="wrapper">
-								<a href="#"><h5>Curabitur tincidunt porta lorem.</h5></a>
-								<ul class="list-inline">
-									<li><i class="fa fa-calendar"></i>25/3/2016</li> 
-									<li><i class="fa fa-thumbs-up"></i>1,200</li>
-								</ul>
-							</div>
-						</div>
-						<div class="post">
-							<a href="single.html">
-								<img src="{{ asset('templates/myafrica/images/ava-3.jpeg')}}" class="img-circle"/>
-							</a>
-							<div class="wrapper">
-								<a href="#"><h5>Curabitur tincidunt porta lorem.</h5></a>
-								<ul class="list-inline">
-									<li><i class="fa fa-calendar"></i>25/3/2016</li> 
-									<li><i class="fa fa-thumbs-up"></i>1,200</li>
-								</ul>
-							</div>
-						</div>
-						<div class="post">
-							<a href="single.html">
-								<img src="{{ asset('templates/myafrica/images/ava-4.jpg')}}" class="img-circle"/>
-							</a>
-							<div class="wrapper">
-								<a href="#"><h5>Curabitur tincidunt porta lorem.</h5></a>
-								<ul class="list-inline">
-									<li><i class="fa fa-calendar"></i>25/3/2016</li> 
-									<li><i class="fa fa-thumbs-up"></i>1,200</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!---- Start Widget ---->
-				<div class="widget wid-banner">
-					<div class="content">
-						<img src="{{ asset('templates/myafrica/images/banner-2.jpg')}}" class="img-responsive"/>
-					</div>
-				</div>
-				<!---- Start Widget ---->
-				<div class="widget wid-categoty">
-					<div class="heading"><h4>Category</h4></div>
-					<div class="content">
-						<select class="col-md-12">
-							<option>Mustard</option>
-							<option>Ketchup</option>
-							<option>Relish</option>
-						</select>
-					</div>
-				</div>
-				<!---- Start Widget ---->
-				<div class="widget wid-calendar">
-					<div class="heading"><h4>Calendar</h4></div>
-					<div class="content">
-						<center><form action="" role="form">        
-							<div class="">
-								<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">                </div>
-								<input type="hidden" id="dtp_input2" value="" /><br/>
-							</div>
-						</form></center>
-					</div>
-				</div>
-				<!---- Start Widget ---->
-				<div class="widget wid-tweet">
-					<div class="heading"><h4>Tweet</h4></div>
-					<div class="content">
-						<div class="tweet-item">
-							<p><i class="fa fa-twitter"></i> TLAS - Coming Soon PSD Mockup</p>
-							<a>https://t.co/dLsNZYGVbJ</a>
-							<a>#psd</a>
-							<a>#freebie</a>
-							<a>#freebie</a>
-							<a>#dribbble</a>
-							<span>July 15th, 2016</span>
-						</div>
-						<div class="tweet-item">
-							<p><i class="fa fa-twitter"></i> Little Dude Character With Multiple Hairs</p>
-							<a>https://t.co/dLsNZYGVbJ</a>
-							<a>#freebie</a>
-							<a>#design</a>
-							<a>#illustrator</a>
-							<a>#dribbble</a>
-							<span>June 23rd, 2016</span>
-						</div>
-						<div class="tweet-item">
-							<p><i class="fa fa-twitter"></i> Newsletter Subscription Form Mockup</p>
-							<a>https://t.co/dLsNZYGVbJ</a>
-							<a>#psd</a>
-							<a>#freebie</a>
-							<a>#freebie</a>
-							<a>#dribbble</a>
-							<span>June 22nd, 2016</span>
-						</div>
-						<p>Marshall, Will, and Holly on a routine expedition, met the greatest earthquake ever known. High on the rapids, it struck their tiny raft...</p>
-					</div>
-				</div>
-			</div>
+			{{ $sideBar }}
 		</div>
 	</div>
+	{{ Form::token() }}
 @stop
 
 @section('postscript')
@@ -482,7 +105,7 @@
 
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-	if ($(window).width() > 768) {
+	if ($(window).width() >= 768) {
 		$('.grid').isotope({
 		  itemSelector: '.item',
 		  layoutMode: 'masonry',

@@ -126,18 +126,38 @@ function emptyMsg (inp) {
 	}
 	return proceed;
 }
+function validateEmail(inp) {
+
+	var atpos = inp.val().indexOf("@");
+    var dotpos = inp.val().lastIndexOf(".");
+    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=inp.val().length) {
+        return false;
+    }
+	return true;
+}
 function validate() {
 	var proceed = 1;
 	$('.validate-input').each(function(index, el) {
-		if (checkEmpty($(el)) == 0) {
-			emptyMsg($(el));
-			proceed = 0;
+		if ($(el).attr('type') == "text") {
+			if (checkEmpty($(el)) == 0) {
+				proceed = 0;
+			}
+		}else if($(el).attr('type') == "email")
+		{
+			if(checkEmpty($(el)) == 0 || validateEmail($(el)) == false)
+			{
+				proceed = 0;
+			}
+		}else if($(el).attr('type') == undefined)
+		{
+			if (checkEmpty($(el)) == 0) {
+				proceed = 0;
+			}
 		}
 	});
 	return proceed;
 }
 function doAjax(url, method, dataType, dataPost, btn, beforeSendCallback, successCallback, errorCallback) {
-	console.log(url);
 	$.ajax({
 		headers: {'csrftoken': $('input[name = _token]').val()},
 		url: url,

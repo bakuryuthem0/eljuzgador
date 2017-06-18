@@ -16,7 +16,7 @@ class NewsController extends BaseController {
 		$rules 	= array_merge(
 			array(
 				'category'		=> 'required|exists:categorias,id',
-				'title'    		=> 'required|max:100',
+				'title'    		=> 'required|max:100|unique:articles,title',
 				'pretitle'    	=> 'sometimes|max:100',
 				'subtitle'    	=> 'sometimes|max:100',
 				'mainorrelevant'=> 'sometimes|in:relevant,main,no',
@@ -39,6 +39,7 @@ class NewsController extends BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 		$news = new Article;
+		$news->slug        = str_replace(' ','-',strtolower($data['title']));
 		$news->cat_id      = $data['category'];
 		$news->title       = $data['title'];
 		
@@ -73,6 +74,9 @@ class NewsController extends BaseController {
 			$subtitle->article_id = $news->id;
 			$subtitle->title 	  = $data['subtitle'];
 			$subtitle->save();
+		}
+		if (Input::has('tags')) {
+			$news->retag($data['tags']);
 		}
 		$ruta 	 = "images/news/".$news->id."/";
 		$file = Input::file();
@@ -166,6 +170,7 @@ class NewsController extends BaseController {
 		$article = Article::with('category')
 		->with('images')
 		->with('pretitle')
+		->with('tags')
 		->find($id);
 		$title = "Modificar Noticia: ".$article->title." | El Juzgador";
 		$cat = Categoria::get();
@@ -181,7 +186,7 @@ class NewsController extends BaseController {
 		$rules 	= array_merge(
 			array(
 				'category'		=> 'required|exists:categorias,id',
-				'title'    		=> 'required|max:100',
+				'title'    		=> 'required|max:100|unique:articles,title',
 				'pretitle'    	=> 'sometimes|max:100',
 				'subtitle'    	=> 'sometimes|max:100',
 				'mainorrelevant'=> 'sometimes|in:relevant,main,no',
@@ -206,6 +211,7 @@ class NewsController extends BaseController {
 
 		$news = Article::find($id);
 		$news->cat_id      = $data['category'];
+		$news->slug        = str_replace(' ','-',strtolower($data['title']));
 		$news->title       = $data['title'];
 		
 		$news->description = $data['description'];
@@ -256,6 +262,9 @@ class NewsController extends BaseController {
 				$subtitle->article_id = $news->id;
 			}
 			$subtitle->save();
+		}
+		if (Input::has('tag')) {
+			$news->retag($data['tag']);
 		}
 		$ruta 	 = "images/news/".$news->id."/";
 		$file = Input::file();
@@ -350,5 +359,86 @@ class NewsController extends BaseController {
 		$response['type'] = "success";
 		$response['msg']  = "Se ha cambiado la noticia relevante.";
 		return Response::json($response);
+	}
+	public function getNewsSelf($slug)
+	{
+		$request = Request::instance();
+		$request->setTrustedProxies(array('127.0.0.1')); // only trust proxy headers coming from the IP addresses on the array (change this to suit your needs)
+		$ip = $request->getClientIp();
+		
+		$art = Article::with('category')
+		->with('images')
+		->with('pretitle')
+		->with('subtitle')
+		->with('likesCount')
+		->with('visitsCount')
+		->with('commentsCount')
+		->with('tags')
+		->with(array('comments' => function($comments){
+			$comments
+			->with('details')
+			->with('likesCount');
+		}))
+		->where('slug','=',$slug)
+		->first();
+
+		$visit = new Visitor;
+		$visit->article_id = $art->id;
+		$visit->ip         = $ip;
+		$visit->save();
+
+		$aux = Like::where('article_id','=',$art->id)->where('ip','=',$ip)->get();
+		if (count($aux) > 0) {
+			$fa = 'fa-heart';
+		}else
+		{
+			$fa = 'fa-heart-o';
+		}
+
+		$title = $art->title." | El Juzgador";
+		
+		$related = Article::where('id','!=',$art->id)
+		->take(3)
+		->with('images')
+		->with('likesCount')
+		->with('visitsCount')
+		->with('commentsCount')
+		->withAnyTag($art->tagNames())
+		->get();
+		return View::make('news.self')
+		->with('title',$title)
+		->with('art',$art)
+		->with('related',$related)
+		->with('fa',$fa)
+		->nest('navbar','partials.sub-navbar')
+		->nest('sideBar','partials.sideBar');
+	}
+	public function getNewLike()
+	{
+		$request = Request::instance();
+		$request->setTrustedProxies(array('127.0.0.1')); // only trust proxy headers coming from the IP addresses on the array (change this to suit your needs)
+		$ip = $request->getClientIp();
+		$art_id = Input::get('art_id');
+
+		$aux = Like::where('article_id','=',$art_id)->where('ip','=',$ip)->get();
+		if (count($aux) > 0) {
+			return Response::json(array(
+				'type' => 'danger',
+				'msg'  => 'Ya a usted le gusta esto.'
+			));
+		}
+		if (Input::has('art_id')) {
+			$like = new Like;
+			$like->article_id = $art_id;
+			$like->ip = $ip;
+			$like->save();
+			$count = Like::where('article_id','=',$art_id)
+			->count();
+			return Response::json(array(
+				'type' => 'success',
+				'msg'  => 'Gracias por su aporte',
+				'count'=> $count
+			));
+		}
 	}
 }

@@ -195,6 +195,12 @@
                           Agregar Imagen
                         </button>                     
                      </div>
+                     <div class="col-xs-12 formulario">
+                        Agregar Tags<small><strong>Escriba su Etiqueta y presione enter</strong></small>) 
+                        <br>
+                        <select name="tags[]" multiple data-role="tagsinput"/>
+                        </select>
+                     </div>
                      <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
                   </form>
@@ -214,7 +220,8 @@
 @stop
 
 @section('postscript')
-
+{{ HTML::style('plugins/bootstrap-tags/bootstrap-tags/dist/bootstrap-tagsinput.css') }}
+{{ HTML::script('plugins/bootstrap-tags/bootstrap-tags/dist/bootstrap-tagsinput.min.js') }}
 {{ View::make('admin.partials.editor') }}
  
 @stop

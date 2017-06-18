@@ -13,7 +13,17 @@
 Route::pattern('id', '[0-9]+');
 
 Route::get('/', 'HomeController@getIndex');
-Route::get('noticias/cargar-mas','HomeController@getMoreNews');
+Route::group(array('before' =>'csrf'),function(){
+	Route::get('noticias/obtener-pagina','HomeController@getPaginateState');
+	Route::get('noticias/cargar-mas','HomeController@getMoreNews');
+	Route::get('agregar-love','NewsController@getNewLike');
+	Route::get('agregar-like','CommentController@getCommentLike');
+	Route::post('noticia/comentario/enviar','CommentController@getNewComment');
+});
+
+Route::get('noticias/ver-noticia/{slug}','NewsController@getNewsSelf');
+Route::get('noticias/busqueda','SearchController@getSearch');
+Route::get('noticias/busqueda/{slug}','SearchController@getSearch');
 
 Route::group(array('before' => 'no_auth'),function()
 {

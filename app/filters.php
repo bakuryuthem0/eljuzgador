@@ -149,7 +149,7 @@ Route::filter('csrf', function()
 	if (Request::ajax()) {
 		if (Session::token() !== Request::header('csrftoken')) {
 			return Response::json(array(
-				'type' => 'danger','msg' => Lang::get('lang.csrf_error')
+				'type' => 'danger','msg' => 'Error, no se encontro el token'
 			));			
 		}		
 	}elseif (Session::token() != Input::get('_token'))

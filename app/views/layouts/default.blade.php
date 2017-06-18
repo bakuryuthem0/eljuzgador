@@ -36,26 +36,57 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
     <![endif]-->
+    @if(isset($fa))
+    	<meta property="og:url"           content="{{ URL::to('noticias/ver-noticia/'.$art->id) }}" />
+	  	<meta property="og:type"          content="website" />
+	  	<meta property="og:title"         content="{{ $art->title }}" />
+	  	<meta property="og:description"   content="{{ $art->description }}" />
+	  	<meta property="og:image"         content="{{ $art->images->first()->image }}" />
+    @endif
 </head>
 
 <body class="index-page">
+    @if(isset($fa))
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=306767519775007";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		<script>window.twttr = (function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0],
+		    t = window.twttr || {};
+		  if (d.getElementById(id)) return t;
+		  js = d.createElement(s);
+		  js.id = id;
+		  js.src = "https://platform.twitter.com/widgets.js";
+		  fjs.parentNode.insertBefore(js, fjs);
+
+		  t._e = [];
+		  t.ready = function(f) {
+		    t._e.push(f);
+		  };
+
+		  return t;
+		}(document, "script", "twitter-wjs"));</script>
+	@endif
 	<input type="hidden" class="baseUrl" value="{{ URL::to('/') }}">
 	<header>
 		<!--Top-->
 		<nav id="top">
 			<div class="container">
 				<div class="row">
-					<div class="col-xs12 col-md-4 visible-lg">
+					<div class="col-xs-12 col-sm-6">
+						<a href="{{ URL::to('/') }}"><img src="{{ asset('images/logo.png') }}" class="logo center-block"></a>
 					</div>
-					<div class="col-xs12 col-md-4">
-						<img src="{{ asset('images/logo.png') }}" class="logo center-block">
-					</div>
-					<div class="col-xs-12 visible-xs text-center social-icons margin-bottom-1">
+					<div class="col-xs-12 col-sm-6 text-center social-icons margin-bottom-1">
 						<i class="fa fa-facebook dark-gray"></i>
 						<i class="fa fa-twitter dark-gray"></i>
 						<i class="fa fa-instagram dark-gray"></i>
 					</div>
-					<div class="col-xs12 col-md-4">
+					<div class="col-xs-12 col-sm-6">
 						<div class="container-fluid">
 							<button class="btn btn-flat btn-menu" data-toggle="collapse" data-target="#menu-options">
 								<i class="fa fa-navicon"></i>
@@ -191,8 +222,8 @@
 		forceParse: 0
     });
 </script>
-<script type="text/javascript" src="js/functions.js"></script>
-<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="{{ asset('js/functions.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
 
 @yield('postscript')
 </body>
