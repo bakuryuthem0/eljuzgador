@@ -11,6 +11,7 @@
 	background-color: #ddd;
 	padding-right: 0;
 	padding-left: 0;
+	padding-top: 0;
 }
 .logo
 {
@@ -51,6 +52,7 @@
 #top .container-fluid ul li, #top .container-fluid ul li a
 {
 	color: #333;
+	font-size: 17px;
 }
 .side-news
 {
@@ -83,9 +85,14 @@
 {
 	color: #333;
 }
+.social-icons
+{
+	text-align: center;
+}
 .social-icons .fa
 {
 	margin: 0 15px;
+	font-size: 22px;
 }
 .margin-bottom-1
 {
@@ -221,23 +228,29 @@ article .entry-content:not(.self-description) p
 {
 	display: none !important;
 }
+.marquesina
+{
+	height: 20px;
+    background-color: #333;
+}
 @media(min-width: 426px){
+	.logo
+	{
+		width: 320px;
+		max-width: 100%;
+	}
 	.btn-menu
 	{
 		display: none;
 	}
 	header
 	{
-		height: 20vh;
+		height: 35vh;
 	}
 	header > #top
 	{
 		padding-top: 5px;
 		height: 100%;
-	}
-	#top ul.top-link.link
-	{
-		text-align: center;
 	}
 	#top ul.top-link.link li
 	{
@@ -246,7 +259,7 @@ article .entry-content:not(.self-description) p
 	}
 	.main-news
 	{
-		height: 80vh;
+		height: 65vh;
 	}
 	.side-news
 	{
@@ -340,8 +353,33 @@ article .entry-content:not(.self-description) p
 		margin: 0 auto;
     	display: block;
 	}
+	.container-fluid, #top ul.top-link.link
+	{
+		padding: 0;
+	}
+	#top ul.top-link.link
+	{
+		text-align: right;
+	}
+	.social-icons
+	{
+		text-align: left;
+	}
 }
 @media(min-width: 769px){
+	header
+	{
+		height: 46vh;
+	}
+	.main-news
+	{
+		height: 55vh;
+	}
+	.logo
+	{
+		width: 500px;
+		max-width: 100%;
+	}
 	.navbar-nav
 	{
 		float: none;
@@ -382,4 +420,5 @@ article .entry-content:not(.self-description) p
 	{
 		width: 32%;
 	}
+
 }

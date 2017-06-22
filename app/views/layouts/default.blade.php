@@ -80,17 +80,24 @@
 	<header>
 		<!--Top-->
 		<nav id="top">
+			<div class="row bg-dark-gray text-center marquesina">
+				<marquee>
+					Titulares mas nuevos /
+					Titulares destacados /
+					Otros titulares /
+				</marquee>
+			</div>
 			<div class="container">
 				<div class="row">
-					<div class="col-xs-12 col-sm-6">
+					<div class="col-xs-12">
 						<a href="{{ URL::to('/') }}"><img src="{{ asset('images/logo.png') }}" class="logo center-block"></a>
 					</div>
-					<div class="col-xs-12 col-sm-6 text-center social-icons margin-bottom-1">
+					<div class="col-xs-12 col-sm-4 social-icons margin-bottom-1">
 						<i class="fa fa-facebook dark-gray"></i>
 						<i class="fa fa-twitter dark-gray"></i>
 						<i class="fa fa-instagram dark-gray"></i>
 					</div>
-					<div class="col-xs-12 col-sm-6">
+					<div class="col-xs-12 col-sm-8">
 						<div class="container-fluid">
 							<button class="btn btn-flat btn-menu" data-toggle="collapse" data-target="#menu-options">
 								<i class="fa fa-navicon"></i>
@@ -114,7 +121,7 @@
 			<div class="">
 				<div class="row">
 					<div class="col-md-4 col-footer footer-1">
-						<div class="footer-heading"><h1><span style="color: #fff;">MYAFRICA</span></h1></div>
+						<div class="footer-heading"><h1><span style="color: #fff;">EL JUZGADOR</span></h1></div>
 						<div class="content">
 							<p>Never missed any post published in our site. Subscribe to our daly newsletter now.</p>
 							<strong>Email address:</strong>
