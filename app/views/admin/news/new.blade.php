@@ -196,7 +196,7 @@
                         </button>                     
                      </div>
                      <div class="col-xs-12 formulario">
-                        Agregar Tags<small><strong>Escriba su Etiqueta y presione enter</strong></small>) 
+                        Agregar Tags<small><strong>(Escriba su Etiqueta y presione enter</strong></small>) 
                         <br>
                         <select name="tags[]" multiple data-role="tagsinput"/>
                         </select>

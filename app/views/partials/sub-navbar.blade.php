@@ -3,7 +3,7 @@
 	<div class="navbar-header">
 		<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
 		<a class="navbar-brand" href="{{ URL::to('/') }}">
-			<div class="">EL JUZGDOR</div>
+			<div class="">EL JUZGADOR</div>
 		</a>
 	</div>
 
