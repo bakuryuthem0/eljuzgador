@@ -35,6 +35,7 @@ Route::group(array('before' => 'no_auth'),function()
 });
 
 Route::group(array('before' => 'auth_admin'), function(){
+	Route::get('administrador/logout','AuthController@getLogout');
 	Route::get('administrador','AdminController@getIndex');
 	Route::get('administrador/inicio','AdminController@getIndex');
 	//perfil

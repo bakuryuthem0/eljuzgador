@@ -129,6 +129,7 @@
                 <li><a href="{{ URL::to('administrador/noticias/ver-noticias') }}"><i class="fa fa-circle-o"></i> Ver Noticias </a></li>
               </ul>
             </li>
+            @if(Auth::user()->role_id <= 2)
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-list"></i>
@@ -139,6 +140,8 @@
                 <li><a href="{{ URL::to('administrador/categorias/ver-categorias') }}"><i class="fa fa-circle-o"></i> Ver Categorías</a></li>
               </ul>
             </li>
+            @endif
+            @if(Auth::user()->role_id == 1)
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-users"></i>
@@ -149,7 +152,7 @@
                 <li><a href="{{ URL::to('administrador/ver-usuarios') }}"><i class="fa fa-circle-o"></i> Ver Usuarios</a></li>
               </ul>
             </li>
-            
+            @endif
           </ul>
         </section>
         <!-- /.sidebar -->

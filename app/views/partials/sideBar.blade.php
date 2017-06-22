@@ -2,7 +2,7 @@
 	<!---- Start Widget ---->
 	<div class="widget wid-banner">
 		<div class="content">
-			<img src="images/banner-2.jpg" class="img-responsive"/>
+			<img src="{{ asset('templates/myafrica/images/banner-2.jpg')}}" class="img-responsive"/>
 		</div>
 	</div>
 	<!---- Start Widget ---->
@@ -48,25 +48,64 @@
 		<div class="content">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#most">Mas Vistos</a></li>
-				<li><a data-toggle="tab" href="#popular">Popular</a></li>
+				<li><a data-toggle="tab" href="#popular">Mas populares</a></li>
 				<li><a data-toggle="tab" href="#random">Random</a></li>
 			</ul>
 			<div class="tab-content">
 				<div id="most" class="tab-pane fade in active">
+					@foreach(SideBarController::getMostViewed() as $a)
+					<div class="post wrap-vid">
+						<div class="col-xs-4 col-sm-6 zoom-container">
+							<div class="zoom-caption">
+								<a href="{{ URL::to('noticias/ver-noticia/'.$a->article->slug) }}"></a>
+							</div>
+							@if(!is_null($a->article->images->first()))
+								@if(strpos($a->article->images->first()->image,'http://') === 0 || strpos($a->article->images->first()->image,'https://') === 0)
+									<img src="{{ $a->article->images->first()->image }}">
+								@else
+									<img src="{{ asset('images/news/'.$a->article->id.'/'.$a->article->images->first()->image) }}">
+								@endif
+							@else
+								<img src="{{ asset('images/logo.png') }}">
+							@endif
+						</div>
+						<div class="col-xs-8 col-sm-6 wrapper">
+							<h5 class="vid-name"><a href="{{ URL::to('noticias/ver-noticia/'.$a->article->slug) }}">{{ $a->article->title }}</a></h5>
+							<div class="info">
+								<span><i class="fa fa-calendar"></i>{{ date('d/m/Y',strtotime($a->article->created_at)) }}</span> 
+								@if(!is_null($a->article->likes_count->first()))
+									<span><i class="fa fa-heart"></i> {{ $a->article->likes_count->first()->aggregate }}</span>
+								@endif
+								@if(!is_null($a->article->comments_count->first()))
+									<span><i class="fa fa-comment-o"></i> {{ $a->article->comments_count->first()->aggregate }}</span>
+								@endif
+								@if(!is_null($a->article->visits_count->first()))
+									<span><i class="fa fa-eye"></i> {{ $a->article->visits_count->first()->aggregate }}</span>
+								@endif
+							</div>
+						</div>
+					</div>
+					@endforeach
+				</div>
+				<div id="popular" class="tab-pane fade">
 					@foreach(SideBarController::getMostPopulars() as $a)
 					<div class="post wrap-vid">
 						<div class="col-xs-4 col-sm-6 zoom-container">
 							<div class="zoom-caption">
 								<a href="{{ URL::to('noticias/ver-noticia/'.$a->article->slug) }}"></a>
 							</div>
-							@if(strpos($a->article->images->first()->image,'http://') === 0 || strpos($a->article->images->first()->image,'https://') === 0)
-								<img src="{{ $a->article->images->first()->image }}">
+							@if(!is_null($a->article->images->first()))
+								@if(strpos($a->article->images->first()->image,'http://') === 0 || strpos($a->article->images->first()->image,'https://') === 0)
+									<img src="{{ $a->article->images->first()->image }}">
+								@else
+									<img src="{{ asset('images/news/'.$a->article->id.'/'.$a->article->images->first()->image) }}">
+								@endif
 							@else
-								<img src="{{ asset('images/news/'.$a->article->id.'/'.$a->article->images->first()->image) }}">
+								<img src="{{ asset('images/logo.png') }}">
 							@endif
 						</div>
 						<div class="col-xs-8 col-sm-6 wrapper">
-							<h5 class="vid-name"><a href="#">{{ $a->article->title }}</a></h5>
+							<h5 class="vid-name"><a href="{{ URL::to('noticias/ver-noticia/'.$a->article->slug) }}">{{ $a->article->title }}</a></h5>
 							<div class="info">
 								<span><i class="fa fa-calendar"></i>{{ date('d/m/Y',strtotime($a->article->created_at)) }}</span> 
 								@if(!is_null($a->article->likes_count->first()))
@@ -102,16 +141,21 @@
 	<!---- Start Widget ---->
 	<div class="widget wid-tags">
 		<div class="widget wid-comment">
-			<div class="heading"><h4>Top Comments</h4></div>
+			<div class="heading"><h4>Top comentarios</h4></div>
 			<div class="content">
 				@foreach(SideBarController::getTopComments() as $top)
 				<div class="post">
 					<div class="">
-						<a href="{{ URL::to('noticias/ver-noticia/'.$top->comment->article->slug) }}"><h5><i class="fa fa-comment"></i> {{ $top->comment->comment }}</h5></a>
+						<a href="{{ URL::to('noticias/ver-noticia/'.$top->comment->article->slug) }}">
+							<h5>
+								<i class="fa fa-comment"></i> {{ $top->comment->comment }}
+							</h5>
+						</a>
 						<ul class="list-inline pull-right">
-							<li><i class="fa fa-calendar"></i>{{ date('d/m/Y',strtotime($top->comment->created_at)) }}</li> 
-							<li><i class="fa fa-thumbs-up"></i>{{ $top->top_comment }}</li>
+							<span><i class="fa fa-calendar"></i>{{ date('d/m/Y',strtotime($top->comment->created_at)) }}</span> 
+							<span><i class="fa fa-thumbs-up"></i>{{ $top->top_comment }}</span>
 						</ul>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 				@endforeach

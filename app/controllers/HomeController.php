@@ -31,7 +31,7 @@ class HomeController extends BaseController {
 		$relevant = Article::where('is_relevant','=',1)
 		->with('category')
 		->with('images')
-		->take(3)
+		->take(6)
 		->get();
 		$main = Article::where('is_main','=',1)
 		->with('category')

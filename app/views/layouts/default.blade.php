@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Free Bootstrap Themes by 365Bootstrap dot com - Free Responsive Html5 Templates">
-    <meta name="author" content="http://www.365bootstrap.com">
+    <meta name="Periodico digital, enfocado en el ambito judicial.">
+    <meta name="author" content="http://www.eljuzgador.com">
 	
     <title>{{ $title }}</title>
 	
@@ -41,7 +41,11 @@
 	  	<meta property="og:type"          content="website" />
 	  	<meta property="og:title"         content="{{ $art->title }}" />
 	  	<meta property="og:description"   content="{{ $art->description }}" />
-	  	<meta property="og:image"         content="{{ $art->images->first()->image }}" />
+	  	@if(!is_null($art->images->first()))
+	  		<meta property="og:image"         content="{{ $art->images->first()->image }}" />
+		@else
+	  		<meta property="og:image"         content="{{ asset('images/logo.png') }}" />
+		@endif
     @endif
 </head>
 
@@ -107,7 +111,7 @@
 
 	<footer>
 		<div class="wrap-footer">
-			<div class="container">
+			<div class="">
 				<div class="row">
 					<div class="col-md-4 col-footer footer-1">
 						<div class="footer-heading"><h1><span style="color: #fff;">MYAFRICA</span></h1></div>
@@ -170,58 +174,7 @@
 	
 	<!-- JS -->
 	<script src="{{ asset('templates/myafrica/owl-carousel/owl.carousel.js')}}"></script>
-    <script>
-    $(document).ready(function() {
-      $("#owl-slide").owlCarousel({
-       autoPlay: 3000,
-			items : 4,
-			itemsDesktop : [1199,4],
-			itemsDesktopSmall : [979,3],
-			itemsTablet : [768, 2],
-			itemsMobile : [479, 1],
-			navigation: true,
-			navigationText: ['<i class="fa fa-chevron-left fa-5x"></i>', '<i class="fa fa-chevron-right fa-5x"></i>'],
-			pagination: false
-      });
-    });
-    </script>
 	
-	
-	<script type="text/javascript" src="{{ asset('templates/myafrica/js/bootstrap-datetimepicker.js')}}" charset="UTF-8"></script>
-	<script type="text/javascript" src="{{ asset('templates/myafrica/js/locales/bootstrap-datetimepicker.fr.js')}}" charset="UTF-8"></script>
-	<script type="text/javascript">
-    $('.form_datetime').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-        showMeridian: 1
-    });
-	$('.form_date').datetimepicker({
-        language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		minView: 2,
-		forceParse: 0
-    });
-	$('.form_time').datetimepicker({
-        language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 1,
-		minView: 0,
-		maxView: 1,
-		forceParse: 0
-    });
-</script>
 <script type="text/javascript" src="{{ asset('js/functions.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
 

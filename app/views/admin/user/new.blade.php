@@ -67,6 +67,23 @@
                         @endforeach
                       @endif
                     </div>
+                    <div class="input-group">
+                     <label class="">Role</label>
+                     <select class="form-control" name="role">
+                      @foreach($roles as $r)
+                        <option value="{{ $r->id }}">{{ $r->description }}</option>
+                      @endforeach
+                     </select>
+                     @if($errors->has('role'))
+                        @foreach($errors->get('role') as $err)
+                        <div class="clearfix"></div>
+                        <div class="alert alert-danger">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          {{ $err }}
+                        </div>
+                        @endforeach
+                      @endif
+                    </div>
                     <input type="hidden" name="status" class="status" value="1">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                   </form>

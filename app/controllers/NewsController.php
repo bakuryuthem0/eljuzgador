@@ -46,7 +46,7 @@ class NewsController extends BaseController {
 		$news->description = $data['description'];
 		if (Input::has('mainorrelevant') && Input::get('mainorrelevant') == "relevant") {
 			$aux = Article::where('is_relevant','=',1);
-			if ($aux->count() >= 3) {
+			if ($aux->count() >= 6) {
 				$last = $aux->orderBy('id','ASC')->first();
 				$last->is_relevant = 0;
 				$last->save();
@@ -217,7 +217,7 @@ class NewsController extends BaseController {
 		$news->description = $data['description'];
 		if (Input::has('mainorrelevant') && Input::get('mainorrelevant') == "relevant") {
 			$aux = Article::where('is_relevant','=',1);
-			if ($aux->count() >= 3) {
+			if ($aux->count() >= 6) {
 				$last = $aux->orderBy('id','ASC')->first();
 				$last->is_relevant = 0;
 				$last->save();
@@ -340,7 +340,7 @@ class NewsController extends BaseController {
 		$aux = Article::where('is_relevant','=',1);
 		$response = array();
 		$response['status'] = 1;
-		if ($aux->count() >= 3) {
+		if ($aux->count() >= 6) {
 			$last = $aux->orderBy('updated_at','ASC')->first();
 			$last->is_relevant = 0;
 			$last->save();

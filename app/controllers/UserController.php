@@ -3,9 +3,11 @@
 class UserController extends BaseController {
 	public function getNewUser()
 	{
-		$title = "Crear nuevo usuario | Escuela de Alta Costura";
+		$roles = Role::get();
+		$title = "Crear nuevo usuario | El Juzgador";
 		return View::make('admin.user.new')
-		->with('title',$title);
+		->with('title',$title)
+		->with('roles',$roles);
 	}
 	public function postNewUser()
 	{
@@ -14,6 +16,7 @@ class UserController extends BaseController {
 			'username' 				=> 'required|min:5|unique:users,username',
 			'password'  			=> 'required|min:6|max:16|confirmed',
 			'password_confirmation' => 'required',
+			'role'					=> 'required|exists:roles,id'
 		);
 		$msg = array();
 		$attr = array(
@@ -27,7 +30,7 @@ class UserController extends BaseController {
 		$user = new User;
 		$user->username = $data['username'];
 		$user->password = Hash::make($data['password']);
-		$user->role_id  = 1;
+		$user->role_id  = $data['role'];
 		if ($user->save()) {
 			Session::flash('success','Se ha creado el usuario satisfactoriamente.');
 			return Redirect::back();
@@ -35,7 +38,7 @@ class UserController extends BaseController {
  	}
  	public function getUsers()
  	{
- 		$title = "Ver Usuarios | Escuela de Alta Costura";
+ 		$title = "Ver Usuarios | El Juzgador";
  		$users = User::with('roles')
  		->where('id','!=',Auth::id())
  		->orderBy('id','DESC')

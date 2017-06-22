@@ -48,16 +48,7 @@ Route::filter('auth', function()
 	}
 });
 Route::filter('auth_admin',function(){
-	if (Auth::check() && Auth::user()->role_id != 1) {
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::to('inicio');
-		}	
-	}elseif(!Auth::check())
+	if(!Auth::check())
 	{
 		if (Request::ajax())
 		{

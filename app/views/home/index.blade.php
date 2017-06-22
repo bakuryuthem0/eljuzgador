@@ -102,7 +102,7 @@
 
 @section('postscript')
 {{ HTML::script("plugins/isotope/dist/isotope.pkgd.min.js")}}
-
+{{ HTML::script('plugins/slick/slick.min.js') }}
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	if ($(window).width() >= 768) {
@@ -110,7 +110,22 @@ jQuery(document).ready(function($) {
 		  itemSelector: '.item',
 		  layoutMode: 'masonry',
 		})
+		$('.side-news').height($('.main-news').height()/3-0.1);
+		
 	}
+	var $options = slideOptions();
+	$('.main-news:not(.relevant-news)').slick($options);
+
+	$(window).on('resize', function(event) {
+		var $options = slideOptions();
+		if ($(window).width() < 768) {
+			$('.side-news').height(55)
+		}else
+		{
+			$('.side-news').height($('.relevant-news').height()/3-0.1);
+		}
+		$('.main-news:not(.relevant-news)').slick('unslick').slick($options);
+	});
 });
 </script>
 @stop

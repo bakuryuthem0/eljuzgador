@@ -20,7 +20,6 @@ class AuthController extends BaseController {
 		$data = array(
 			'username' => Input::get('username'),
 			'password' => Input::get('password'),
-			'role_id'  => 1
 		);
 		$rules = array(
 			'username' => 'required|exists:users,username,role_id,1',
@@ -41,13 +40,6 @@ class AuthController extends BaseController {
 	}
 	public function getLogout()
 	{
-		$log =  LastLogin::where('user_id','=',Auth::id())->orderBy('id','DESC');
-		if ($log->count() > 0) {
-			$log = $log->first();
-			$log->logout = date('Y-m-d H:i:s',time());
-			$log->save();
-			
-		}
 		Auth::logout();
 		return Redirect::to('/');
 	}

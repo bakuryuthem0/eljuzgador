@@ -12,7 +12,7 @@ function loadContentNews(response, btn)
 			$('.grid').isotope('layout');
 
 		});
-		$('.grid').isotope('layout');
+		$('.grid').isotope( 'reLayout')
 	}
 }
 function endAjax(btn) {

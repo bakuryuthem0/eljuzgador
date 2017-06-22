@@ -4,7 +4,7 @@
 {{ $navbar }}
 
 <!-- /////////////////////////////////////////Content -->
-<div id="page-content" class="single-page container">
+<div id="page-content" class="single-page clearfix">
 	<div class="gutter-7px">
 		<div id="main-content" class="col-md-8 fix-right">
 			<article class="single-post">
@@ -30,10 +30,14 @@
 					</span>
 				</div>
 				<div class="post-thumbnail-wrap">
-					@if(strpos($art->images->first()->image,'http://') === 0 || strpos($art->images->first()->image,'https://') === 0)
-						<img src="{{ $art->images->first()->image }}" />
+					@if(!is_null($art->images->first()))
+						@if(strpos($art->images->first()->image,'http://') === 0 || strpos($art->images->first()->image,'https://') === 0)
+							<img src="{{ $art->images->first()->image }}" />
+						@else
+							<img src="{{ asset('images/news/'.$art->id.'/'.$art->images->first()->image) }}" />
+						@endif
 					@else
-						<img src="{{ asset('images/news/'.$art->id.'/'.$art->images->first()->image) }}" />
+						<img src="{{ asset('images/logo.png') }}" />
 					@endif
 				</div>
 				<div class="l-share" style="padding: 20px 0;">

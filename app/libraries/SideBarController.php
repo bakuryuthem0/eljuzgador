@@ -15,6 +15,21 @@
 			->get();
 			return $comments;
 		}
+		public static function getMostViewed()
+		{
+			$articles = Visitor::groupBy('article_id')
+			->take(4)
+			->orderBy('top_articles','DESC')
+			->with(array('article' => function($article){
+				$article->with('images')
+				->with('likesCount')
+				->with('visitsCount')
+				->with('commentsCount');
+			}))
+			->selectRaw('count(article_id) as top_articles, article_id')
+			->get();
+			return $articles;
+		}
 		public static function getMostPopulars()
 		{
 			$articles = Like::groupBy('article_id')
