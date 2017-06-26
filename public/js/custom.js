@@ -1,3 +1,15 @@
+function menu(btn) {
+	if (btn.hasClass('active')) {
+        btn.removeClass('active');
+        $('.side-menu').removeClass('active');
+        $('.overly').fadeOut('fast');
+    }else
+    {
+        btn.addClass('active');
+        $('.side-menu').addClass('active');
+        $('.overly').fadeIn('fast');
+    }
+}
 function beforeSend(btn) {
 	btn.addClass('disabled').attr('disabled',true);
 }
@@ -82,6 +94,25 @@ function successLoadContent  (response, btn) {
 	$(btn.data('target')).append(response);
 }
 jQuery(document).ready(function($) {
+	$('.btn-menu').on('click', function(event) {
+		menu($(this));
+    });
+    $('.overly').on('click', function(event) {
+    	menu($('.btn-menu'));
+    });
+    $('.postfix').on('click', function(event) {
+    	$(this).next('.filter-input').focus();
+    });
+    $(window).on('scroll', function(event) {
+    	if ($(window).scrollTop() > 10) {
+    		$('.header').addClass('scrolled');
+    		$('body').addClass('scrolled');
+    	}else
+    	{
+    		$('.header.scrolled').removeClass('scrolled');
+    		$('body').removeClass('scrolled');
+    	}
+    });
 	$(document).on("click",'.load-more',function(){
 		var dataPost = {}, btn = $(this);
 		doAjax(getRootUrl()+'/noticias/obtener-pagina?page='+btn.data('current'), "GET", "json", dataPost, btn, beforeSend, successCheck, ajaxError);

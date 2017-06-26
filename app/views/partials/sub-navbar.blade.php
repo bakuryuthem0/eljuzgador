@@ -2,9 +2,6 @@
 <nav id="menu" class="navbar navbar-default" role="navigation">
 	<div class="navbar-header">
 		<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
-		<a class="navbar-brand" href="{{ URL::to('/') }}">
-			<div class="">EL JUZGADOR</div>
-		</a>
 	</div>
 
 <!-- Collect the nav links, forms, and other content for toggling -->

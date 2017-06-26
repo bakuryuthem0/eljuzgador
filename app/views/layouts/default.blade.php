@@ -77,7 +77,7 @@
 		}(document, "script", "twitter-wjs"));</script>
 	@endif
 	<input type="hidden" class="baseUrl" value="{{ URL::to('/') }}">
-	<header>
+	<header class="header">
 		<!--Top-->
 		<nav id="top">
 			<div class="row bg-dark-gray text-center marquesina">
@@ -87,33 +87,36 @@
 					Otros titulares /
 				</marquee>
 			</div>
-			<div class="container">
+			<div class="container relative">
 				<div class="row">
 					<div class="col-xs-12">
 						<a href="{{ URL::to('/') }}"><img src="{{ asset('images/logo.png') }}" class="logo center-block"></a>
 					</div>
-					<div class="col-xs-12 col-sm-4 social-icons margin-bottom-1">
+					<div class="col-xs-12 social-icons margin-bottom-1">
 						<i class="fa fa-facebook dark-gray"></i>
 						<i class="fa fa-twitter dark-gray"></i>
 						<i class="fa fa-instagram dark-gray"></i>
 					</div>
-					<div class="col-xs-12 col-sm-8">
-						<div class="container-fluid">
-							<button class="btn btn-flat btn-menu" data-toggle="collapse" data-target="#menu-options">
-								<i class="fa fa-navicon"></i>
-							</button>
-							<ul class="list-inline top-link link navbar-collapse collapse" id="menu-options">
-								<li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
-								<li><a href="contact.html"><i class="fa fa-comments"></i> Contact</a></li>
-								<li><a href="#"><i class="fa fa-question-circle"></i> FAQ</a></li>
-							</ul>
-						</div>
-					</div>
+					<button class="btn btn-flat btn-menu center-block">
+						<i class="fa fa-navicon"></i>
+					</button>
 				</div>
 			</div>
 		</nav>
 	</header>
-	
+	<section class="side-menu">
+		<div class="text-center"><h2>Menu</h2></div>
+		<nav class="menu">
+			<ul class="list-inline top-link link" id="menu-options">
+				<li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+				<li><a href="contact.html"><i class="fa fa-comments"></i> Contact</a></li>
+				<li><a href="#"><i class="fa fa-question-circle"></i> FAQ</a></li>
+			</ul>
+		</nav>
+	  	<div class="text-center">
+			<a href="{{ URL::to('/') }}"><img src="{{ asset('images/logo.png') }}" class="logo"></a>
+	  	</div>
+	</section>
 	@yield('content')
 
 	<footer>
@@ -178,7 +181,7 @@
 		</div>
 	</footer>
 	<!-- Footer -->
-	
+	<div class="overly"></div>
 	<!-- JS -->
 	<script src="{{ asset('templates/myafrica/owl-carousel/owl.carousel.js')}}"></script>
 	
