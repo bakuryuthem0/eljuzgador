@@ -441,4 +441,23 @@ class NewsController extends BaseController {
 			));
 		}
 	}
+	public function getNewMarquee()
+	{
+		$id = Input::get('id');
+		$response = array();
+		$response['status'] = 1;
+		
+		$art =  Article::find($id);
+		if ($art->show_marquee == 1) {
+			$art->show_marquee = 0;
+			$response['status'] = 3;
+		}else
+		{
+			$art->show_marquee = 1;
+		}
+		$art->save();
+		$response['type'] = "success";
+		$response['msg']  = "Se ha agregado a la marquesina.";
+		return Response::json($response);
+	}
 }

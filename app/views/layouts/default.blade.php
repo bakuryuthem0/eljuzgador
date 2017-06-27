@@ -82,9 +82,9 @@
 		<nav id="top">
 			<div class="row bg-dark-gray text-center marquesina">
 				<marquee>
-					Titulares mas nuevos /
-					Titulares destacados /
-					Otros titulares /
+					@foreach(NavBarController::getMarquee() as $a)
+					<a href="{{ URL::to('noticias/ver-noticia/'.$a->slug) }}">{{ ucfirst(strtolower($a->title)) }}</a> /
+					@endforeach
 				</marquee>
 			</div>
 			<div class="container relative">

@@ -127,7 +127,16 @@ jQuery(document).ready(function($) {
           var max_text  = check.data('max-text');
           var url       = check.data('url');
           checkMenuCat(check, length, max_text, url, checked, $(table.rows().nodes()));
-        });
+    });
+    $(document).on('click', '.titular_active', function(event) {
+    	var table = $('.menu-cat-table').DataTable();
+          var checked = $(table.rows().nodes()).find('.menu_active:checked').length
+          var check     = $(this);
+          var length    = "1000 maximo";
+          var max_text  = 1000;
+          var url       = check.data('url');
+          checkMenuCat(check, length, max_text, url, checked, $(table.rows().nodes()));
+    });
 	/***************************/
 	/***                     ***/
 	/***        Ajax         ***/

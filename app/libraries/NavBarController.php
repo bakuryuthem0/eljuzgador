@@ -9,4 +9,9 @@
 
 			return $cat;
 		}		
+		public static function getMarquee()
+		{
+			$art = Article::where('show_marquee','=',1)->get();
+			return $art;
+		}
 	}

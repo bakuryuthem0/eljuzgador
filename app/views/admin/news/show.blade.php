@@ -34,6 +34,7 @@
                           <th>sub-titulo</th>
                           <th>Ver Detalles</th>
                           <th class="menu_active_title" data-toggle="popover" data-trigger="manual" title="Alerta" data-content="">Relevante</th>
+                          <th class="titulares_title" data-toggle="popover" data-trigger="manual" title="Alerta" data-content="">Titulares</th>
                           <th>Modificar</th>
                           <th>Eliminar</th>
                         </tr>
@@ -49,6 +50,10 @@
                         <td>
                           <img src="{{ asset('images/loader.gif') }}" class="miniLoader">
                           <input type="checkbox" class="menu_active menu_active_{{ $a->id }}" data-url="{{ URL::to('administrador/noticias/activar-relevante') }}" data-max-text="6 categorías" data-length="6" name="menu_cat_{{ $a->id }}" value="{{ $a->id }}" @if($a->is_relevant == 1) checked @endif>
+                        </td>
+                        <td>
+                          <img src="{{ asset('images/loader.gif') }}" class="miniLoader">
+                          <input type="checkbox" class="titular_active titular_active_{{ $a->id }}" data-url="{{ URL::to('administrador/noticias/activar-titular') }}" name="titular_{{ $a->id }}" value="{{ $a->id }}" @if($a->show_marquee == 1) checked @endif>
                         </td>
                        	<td><a target="_blank" href="{{ URL::to('administrador/noticia/modificar/'.$a->id) }}" class="btn btn-warning btn-xs">Modificar</a></td>
                        	<td><button class="btn btn-danger btn-xs btn-elim-article" value="{{ $a->id}}" data-toggle="modal" data-target="#elimThing" data-url="{{ URL::to('administrador/ver-articulos/eliminar') }}" data-tosend="id">Eliminar</button></td>

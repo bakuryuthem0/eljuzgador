@@ -72,5 +72,6 @@ Route::group(array('before' => 'auth_admin'), function(){
 		Route::post('administrador/noticia/modificar/{id}/enviar','NewsController@postMdfArt');
 		Route::post('administracion/noticias/imagen/eliminar-imagen','NewsController@postElimNewsImage');
 		Route::get('administrador/noticias/activar-relevante','NewsController@getNewRelevant');
+		Route::get('administrador/noticias/activar-titular','NewsController@getNewMarquee');
 	});
 });
